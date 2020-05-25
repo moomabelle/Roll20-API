@@ -1674,8 +1674,9 @@ var Calendar = Calendar || (function() {
         var handout = getHandout();
         var nowdate;
         var ordinal = state.Calendar.now.ordinal;
+        var world = (Number(state.Calendar.now.world)
         
-        switch(Number(state.Calendar.now.world)) {
+        switch(world) {
             case 1:
                 nowdate = getFaerunDate(ordinal).split(',');
                 break;
@@ -1701,6 +1702,8 @@ var Calendar = Calendar || (function() {
         var suffix = getsuffix(day);
         var year = state.Calendar.now.year;
         var date = day + suffix + " " + month + ", " + year;
+
+        if(world==6){date=date + "ᴍᴇ"}
         
         handout.get('notes', function(nts) {
             
@@ -1708,9 +1711,9 @@ var Calendar = Calendar || (function() {
                 setTimeout(function(){
                     var newtext;
                     if (addTime === "Yes"){
-                        newtext = nts + "<br>" + date + " " + state.Calendar.now.time + " - " + text;
+                        newtext = nts + "<br><b>" + date + " " + state.Calendar.now.time + "</b> — " + text;
                     } else {
-                         newtext = nts + "<br>" + date + " - " + text;
+                         newtext = nts + "<br><b>" + date + "</b> — " + text;
                     }
                     
                     handout.set('notes', newtext);                      
