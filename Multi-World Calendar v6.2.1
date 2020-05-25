@@ -1252,6 +1252,15 @@ var Calendar = Calendar || (function() {
                     state.Calendar.now.ordinal = newordinal;
                 }
                 break;
+            case 6:
+                if(newordinal>324){
+                    state.Calendar.now.ordinal=newordinal-324;
+                    state.Calendar.now.year = Number(state.Calendar.now.year)+1;
+                }else{
+                    state.Calendar.now.ordinal = newordinal;
+                }
+                break;
+
         }
     },
     
@@ -1331,14 +1340,18 @@ var Calendar = Calendar || (function() {
         var season;
         var ordinal = state.Calendar.now.ordinal;
         
-        if(ordinal > 349 || ordinal <= 75){
-            season = 'Winter'
-        }else if(ordinal <= 166){
-            season = 'Spring'
-        }else if(ordinal <=257 ){
-            season = 'Summer'
-        }else if(ordinal <=349 ){
-            season = 'Fall'
+        if(world==6){
+          season = 'Spring'
+        }else{
+            if(ordinal > 349 || ordinal <= 75){
+                season = 'Winter'
+            }else if(ordinal <= 166){
+                season = 'Spring'
+            }else if(ordinal <=257 ){
+                season = 'Summer'
+            }else if(ordinal <=349 ){
+                season = 'Fall'
+            }
         }
         
         roll = Math.floor(Math.random()*(20-1+1)+1);
